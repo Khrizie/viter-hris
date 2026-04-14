@@ -1,18 +1,22 @@
-import React from 'react'
-import Header from '../../partials/Header'
-import Navigation from '../../partials/Navigation'
-import { navlist } from './nav-function';
+import React from "react";
+import { navList } from "./nav-function";
+import Header from "../../partials/Header";
+import Navigation from "../../partials/Navigation";
 
-const Layout = ({children, menu, submenu = ""}) => {
+const Layout = ({ children, menu, submenu = "" }) => {
   return (
     <>
+      {/*HEADER*/}
       <Header />
-      <Navigation menu={menu} submenu={submenu}
-        navigationList={navlist} />
-      
-      {children}
+
+      {/*NAVIGATION*/}
+      <Navigation menu={menu} submenu={submenu} navigationList={navList} />
+
+      {/*BODY*/}
+      <div className="wrapper">{children}</div>
+
+      {/*FOOTER*/}
     </>
   );
-}
-
-export default Layout
+};
+export default Layout;

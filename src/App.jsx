@@ -1,28 +1,26 @@
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
-import {Route, BrowserRouter as Router, Routes} from 'react-router-dom'
-import { routesDeveloper } from './routes/routesDeveloper';
-import { StoreProvider } from './store/StoreContext';
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { routeDeveloper } from "./routes/routesDeveloper";
+import { StoreProvider } from "./store/StoreContext";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <StoreProvider>
+    <QueryClientProvider client={queryClient}>
+      <StoreProvider>
         <Router>
           <Routes>
-            <Route path="*" element=<>page not found</> />
-            {routesDeveloper.map(({...routesProps}, key) => {
+            <Route path="*" element={<>page not found.</>} />
+
+            {routeDeveloper.map(({ ...routesProps }, key) => {
               return <Route key={key} {...routesProps} />;
             })}
           </Routes>
         </Router>
-        </StoreProvider>
-      </QueryClientProvider>
-    </>
-  )
+      </StoreProvider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;

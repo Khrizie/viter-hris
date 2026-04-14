@@ -37,7 +37,7 @@ const Header = () => {
               />
             </button>
             <div className="pl-1">
-              <img src="" alt="" />
+              <img src="LOGO" alt="LOGO" />
             </div>
           </div>
         </div>
