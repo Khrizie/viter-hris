@@ -16,8 +16,6 @@ class Roles {
     public function __construct($db){
         $this->connection = $db;
         $this->tblSettingsRoles = "settings_roles";
-
-        
     }
 
     public function create(){
@@ -45,14 +43,12 @@ class Roles {
                 "role_updated" => $this->role_updated,
             ]);
             $this->lastInsertedId = $this->connection->lastInsertId();
-        }catch (PDOException $e){
+        } catch (PDOException $e){
             returnError($e);
             $query = false;
-
         }
         return $query;
     }
-
 
     public function readAll(){
         try{
@@ -60,12 +56,34 @@ class Roles {
             $sql .= " * ";
             $sql .= " from {$this->tblSettingsRoles} ";
             $query = $this->connection->query($sql);
-        }catch(PDOException $e){
+        } catch(PDOException $e){
             returnError($e);
             $query = false;
         }
         return $query;
-
     }
 
+    public function update (){
+        try{
+            $sql = "update {$this->tblSettingsRoles} set ";
+            // Added missing semicolons and trailing spaces for correct SQL formatting
+            $sql .= "role_name = :role_name, "; 
+            $sql .= "role_description = :role_description, ";
+            $sql .= "role_updated = :role_updated ";
+            // Removed the extra space in :role_aid and added the semicolon
+            $sql .= "where role_aid = :role_aid"; 
+            
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "role_name" => $this->role_name,
+                "role_description" => $this->role_description,
+                "role_updated" => $this->role_updated,
+                "role_aid" => $this->role_aid,
+            ]);
+
+        } catch (PDOException $e){
+            $query = false;
+        }
+        return $query;
+    }
 }

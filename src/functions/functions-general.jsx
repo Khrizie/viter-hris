@@ -23,23 +23,23 @@ export const formatDate = (dateVal, val = "", format = "") => {
     // formatting date
     const event = new Date(dateVal);
 
-    return event.toLocaleString("en", options(format));
+    return event.toLocaleString("en", dateOptions(format));
   }
   return formatedDate;
 };
 
 export const dateOptions = (format = "") => {
-let options = {
-  month: "long",
-  day: "numeric",
-  year: "numeric",
-};
-if (format == 'short-date'){
-  return{
-    month: "short",
-  day: "numeric",
-  year: "numeric",
+  let options = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   };
-}
-return options;
-} ;
+  if (format == "short-date") {
+    return {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+  }
+  return options;
+};
