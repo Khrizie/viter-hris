@@ -10,6 +10,7 @@ require '../../../../core/functions.php';
 $body = file_get_contents('php://input');
 $data = json_decode($body, true);
 
+returnError($data);
 //Create/post
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
    $result = require './create.php';
