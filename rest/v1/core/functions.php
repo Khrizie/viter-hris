@@ -12,21 +12,26 @@ function sendResponse($result) {
     $response->send();
 
 }
-
 function checkDbConnection() {
-   try{
-    $conn = Database::connectionDB();
-    return $conn;
-   }catch(PDOException $error) {
-    $error = [];
-    $error['type'] = 'invalid_request_error';
-    $error['success'] = 'false';
-    $error['error'] = 'database connection failed: ';
-    $response->setSuccess(false);
-    $response->setData($error);
-    $response->send();
-    exit;
-}
+   try {
+        $conn = Database::connectDb(); 
+        return $conn;
+
+   } catch(PDOException $error) {
+
+        $response = new Response(); 
+
+        $err = [];
+        $err['type'] = 'invalid_request_error';
+        $err['success'] = false;
+        $err['error'] = 'Database connection failed';
+        $err['message'] = $error->getMessage();
+
+        $response->setSuccess(false);
+        $response->setData($err);
+        $response->send();
+        exit;
+   }
 }
 
 function checkApiKey()
