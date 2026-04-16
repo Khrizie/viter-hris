@@ -7,11 +7,20 @@ import {
 import NoData from "../../../../partials/NoData";
 import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
 import TableLoading from "../../../../partials/TableLoading";
-import { FaEdit } from "react-icons/fa";
+import { FaArchive, FaEdit, FaTrash, FaTrashRestore } from "react-icons/fa";
 import { StoreContext } from "../../../../store/StoreContext";
-import { setIsAdd } from "../../../../store/StoreAction";
+import {
+  setIsAdd,
+  setIsArchive,
+  setIsDelete,
+  setIsRestore,
+} from "../../../../store/StoreAction";
+import Status from "../../../../partials/Status";
+import ModalArchive from "../../../../partials/modals/ModalArchive";
+import ModalRestore from "../../../../partials/modals/ModalRestore";
+import ModalDelete from "../../../../partials/modals/ModalDelete";
 
-const RolesList = ({ setItemEdit }) => {
+const RolesList = ({ itemEdit, setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const {
     isLoading,
@@ -22,11 +31,23 @@ const RolesList = ({ setItemEdit }) => {
     "get", //method request (get, post,)
     "roles", //query key
   );
-
   const handleEdit = (item) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
   };
+  const handleArchive = (item) => {
+    setItemEdit(item);
+    dispatch(setIsArchive(true));
+  };
+  const handleRestore = (item) => {
+    setItemEdit(item);
+    dispatch(setIsRestore(true));
+  };
+  const handleDelete = (item) => {
+    setItemEdit(item);
+    dispatch(setIsDelete(true));
+  };
+  console.log(itemEdit);
 
   return (
     <>
@@ -36,6 +57,7 @@ const RolesList = ({ setItemEdit }) => {
           <thead>
             <tr>
               <th>#</th>
+              <th>Status</th>
               <th>Role</th>
               <th>Description</th>
               <th>Created</th>
@@ -61,6 +83,11 @@ const RolesList = ({ setItemEdit }) => {
                 return (
                   <tr key={key}>
                     <td>{key + 1}.</td>
+                    <td>
+                      <Status
+                        text={`${item.role_is_active == 1 ? "active" : "inactive"}`}
+                      />
+                    </td>
                     <td>{item.role_name}</td>
                     <td>{item.role_description}</td>
                     <td>{formatDate(item.role_created, "--", "short-date")}</td>
@@ -77,9 +104,34 @@ const RolesList = ({ setItemEdit }) => {
                             >
                               <FaEdit />
                             </button>
+                            <button
+                              type="button"
+                              className="tooltip-action-table"
+                              data-tooltip="Archive"
+                              onClick={() => handleArchive(item)}
+                            >
+                              <FaArchive />
+                            </button>
                           </>
                         ) : (
-                          <></>
+                          <>
+                            <button
+                              type="button"
+                              className="tooltip-action-table"
+                              data-tooltip="Restore"
+                              onClick={() => handleRestore(item)}
+                            >
+                              <FaTrashRestore />
+                            </button>
+                            <button
+                              type="button"
+                              className="tooltip-action-table"
+                              data-tooltip="Delete"
+                              onClick={() => handleDelete(item)}
+                            >
+                              <FaTrash />
+                            </button>
+                          </>
                         )}
                       </div>
                     </td>
@@ -90,6 +142,37 @@ const RolesList = ({ setItemEdit }) => {
           </tbody>
         </table>
       </div>
+
+      {store.isArchive && (
+        <ModalArchive
+          mysqlApiArchive={`${apiVersion}/controllers/developers/settings/roles/active.php?id=${itemEdit.role_aid}`}
+          msg="Are you sure you want to archive this record?"
+          successMsg="Successfully archived."
+          item={itemEdit.role_name}
+          dataItem={itemEdit}
+          queryKey="roles"
+        />
+      )}
+      {store.isRestore && (
+        <ModalRestore
+          mysqlApiRestore={`${apiVersion}/controllers/developers/settings/roles/active.php?id=${itemEdit.role_aid}`}
+          msg="Are you sure you want to restore this record?"
+          successMsg="Successfully restore."
+          item={itemEdit.role_name}
+          dataItem={itemEdit}
+          queryKey="roles"
+        />
+      )}
+      {store.isDelete && (
+        <ModalDelete
+          mysqlApiDelete={`${apiVersion}/controllers/developers/settings/roles/roles.php?id=${itemEdit.role_aid}`}
+          msg="Are you sure you want to delete this record?"
+          successMsg="Successfully deleted."
+          item={itemEdit.role_name}
+          dataItem={itemEdit}
+          queryKey="roles"
+        />
+      )}
     </>
   );
 };

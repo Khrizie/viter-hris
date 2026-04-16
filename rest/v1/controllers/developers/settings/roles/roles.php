@@ -31,3 +31,9 @@ if($_SERVER['REQUEST_METHOD'] === 'PUT') {
    sendResponse($result);
    exit;
 }
+//delete/put
+if($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+   $result = require 'delete.php';
+   sendResponse($result);
+   exit;
+}

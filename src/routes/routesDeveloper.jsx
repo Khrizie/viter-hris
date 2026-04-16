@@ -1,10 +1,32 @@
 import { devNavUrl, urlDeveloper } from "../functions/functions-general";
+import Dashboard from "../pages/developer/dashboard/Dashboard";
+import Employees from "../pages/developer/employees/Employees";
 import Roles from "../pages/developer/settings/roles/Roles";
 
 export const routeDeveloper = [
   {
     path: `${devNavUrl}/${urlDeveloper}`,
-    element: <></>,
+    element: (
+      <>
+        <Dashboard />
+      </>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlDeveloper}/Dashboard`,
+    element: (
+      <>
+        <Dashboard />
+      </>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlDeveloper}/employees`,
+    element: (
+      <>
+        <Employees />
+      </>
+    ),
   },
   {
     path: `${devNavUrl}/${urlDeveloper}/settings/roles`,
