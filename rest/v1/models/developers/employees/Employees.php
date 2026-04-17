@@ -30,12 +30,16 @@ class Employees {
             $sql .= " ( ";
             $sql .= " employee_is_active, ";
             $sql .= " employee_first_name, ";
+            $sql .= " employee_middle_name, ";
+            $sql .= " employee_last_name, ";
             $sql .= " employee_email, ";
             $sql .= " employee_created, ";
             $sql .= " employee_updated ";
             $sql .= " ) values ( ";
             $sql .= " :employee_is_active, ";
             $sql .= " :employee_first_name, ";
+            $sql .= " :employee_middle_name, ";
+            $sql .= " :employee_last_name, ";
             $sql .= " :employee_email, ";
             $sql .= " :employee_created, ";
             $sql .= " :employee_updated ";
@@ -44,6 +48,8 @@ class Employees {
             $query->execute([
                 "employee_is_active" => $this->employee_is_active,
                 "employee_first_name" => $this->employee_first_name,
+                "employee_middle_name" => $this->employee_middle_name,
+                "employee_last_name" => $this->employee_last_name,
                 "employee_email" => $this->employee_email,
                 "employee_created" => $this->employee_created,
                 "employee_updated" => $this->employee_updated,

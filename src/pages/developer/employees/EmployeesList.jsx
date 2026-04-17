@@ -8,23 +8,46 @@ import { queryDataInfinite } from "../../../functions/custom-hooks/queryDataInfi
 import Loadmore from "../../../partials/Loadmore";
 import Status from "../../../partials/Status";
 import { FaArchive, FaEdit, FaTrash, FaTrashRestore } from "react-icons/fa";
-import ModalArchive from "../../../partials/modals/ModalArchive";
-import ModalRestore from "../../../partials/modals/ModalRestore";
-import ModalDelete from "../../../partials/modals/ModalDelete";
 import FetchingSpinner from "../../../partials/spinners/FetchingSpinner";
 import TableLoading from "../../../partials/TableLoading";
 import NoData from "../../../partials/NoData";
 import SearchBar from "../../../partials/SearchBar";
+import ModalArchive from "../../../partials/modals/ModalArchive";
+import ModalRestore from "../../../partials/modals/ModalRestore";
+import ModalDelete from "../../../partials/modals/ModalDelete";
+import {
+  setIsAdd,
+  setIsArchive,
+  setIsDelete,
+  setIsRestore,
+} from "../../../store/StoreAction";
 
 const EmployeesList = ({ itemEdit, setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   // page
   const [page, setPage] = React.useState(1);
-  const [filterData, setFilterData] = React.useState(null);
+  const [filterData, setFilterData] = React.useState("");
   const [onSearch, setOnSearch] = React.useState(false);
   const search = React.useRef({ value: "" });
   const { ref, inView } = useInView();
   let counter = 1;
+
+  const handleEdit = (item) => {
+    dispatch(setIsAdd(true));
+    setItemEdit(item);
+  };
+  const handleArchive = (item) => {
+    setItemEdit(item);
+    dispatch(setIsArchive(true));
+  };
+  const handleRestore = (item) => {
+    setItemEdit(item);
+    dispatch(setIsRestore(true));
+  };
+  const handleDelete = (item) => {
+    setItemEdit(item);
+    dispatch(setIsDelete(true));
+  };
   //   use if with loadmore button and search bar
   const {
     data: result,
@@ -35,7 +58,7 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["Employees", search.current.value, store.isSearch, filterData],
+    queryKey: ["employees", search.current.value, store.isSearch, filterData],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
         ``, // search endpoint
@@ -93,9 +116,10 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
             <tr>
               <th>#</th>
               <th>Status</th>
-              <th>Employee First Name</th>
-              <th>Employee Middle Name</th>
-              <th>Employee Last Name</th>
+              <th>FirstName</th>
+              <th>MiddleName</th>
+              <th>LastName</th>
+              <th>Email</th>
               <th>Created</th>
               <th>Date Update</th>
               <th></th>
@@ -128,7 +152,7 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
                         />
                       </td>
                       <td>{item.employee_first_name}</td>
-                      <td> {item.employee_middle_name}</td>
+                      <td>{item.employee_middle_name}</td>
                       <td>{item.employee_last_name}</td>
                       <td>{item.employee_email}</td>
                       <td>
@@ -139,7 +163,7 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
                       </td>
                       <td>
                         <div className="flex items-center gap-3">
-                          {item.employees_is_active == 1 ? (
+                          {item.employee_is_active == 1 ? (
                             <>
                               <button
                                 type="button"
@@ -198,7 +222,7 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
 
       {store.isArchive && (
         <ModalArchive
-          mysqlApiArchive={`${apiVersion}/controllers/developers/settings/employees/active.php?id=${itemEdit.employee_aid}`}
+          mysqlApiArchive={`${apiVersion}/controllers/developers/employees/active.php?id=${itemEdit.employee_aid}`}
           msg="Are you sure you want to archive this record?"
           successMsg="Successfully archived."
           item={itemEdit.employee_first_name}
@@ -212,7 +236,7 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
 
       {store.isRestore && (
         <ModalRestore
-          mysqlApiRestore={`${apiVersion}/controllers/developers/settings/employees/active.php?id=${itemEdit.employee_aid}`}
+          mysqlApiRestore={`${apiVersion}/controllers/developers/employees/active.php?id=${itemEdit.employee_aid}`}
           msg="Are you sure you want to restore this record?"
           successMsg="Successfully restore."
           item={itemEdit.employee_first_name}
@@ -225,7 +249,7 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
       )}
       {store.isDelete && (
         <ModalDelete
-          mysqlApiDelete={`${apiVersion}/controllers/developers/settings/employees/employees.php?id=${itemEdit.employee_aid}`}
+          mysqlApiDelete={`${apiVersion}/controllers/developers/employees/employees.php?id=${itemEdit.employee_aid}`}
           msg="Are you sure you want to delete this record?"
           successMsg="Successfully deleted."
           item={itemEdit.employee_first_name}
