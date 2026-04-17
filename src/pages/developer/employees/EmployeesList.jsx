@@ -1,12 +1,20 @@
 import React from "react";
 import { StoreContext } from "../../../store/StoreContext";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { apiVersion } from "../../../functions/functions-general";
+import { apiVersion, formatDate } from "../../../functions/functions-general";
 import { useInView } from "react-intersection-observer";
-import NoData from "../../../partials/NoData";
 import ServerError from "../../../partials/ServerError";
-import TableLoading from "../../../partials/TableLoading";
+import { queryDataInfinite } from "../../../functions/custom-hooks/queryDataInfinite";
+import Loadmore from "../../../partials/Loadmore";
+import Status from "../../../partials/Status";
+import { FaArchive, FaEdit, FaTrash, FaTrashRestore } from "react-icons/fa";
+import ModalArchive from "../../../partials/modals/ModalArchive";
+import ModalRestore from "../../../partials/modals/ModalRestore";
+import ModalDelete from "../../../partials/modals/ModalDelete";
 import FetchingSpinner from "../../../partials/spinners/FetchingSpinner";
+import TableLoading from "../../../partials/TableLoading";
+import NoData from "../../../partials/NoData";
+import SearchBar from "../../../partials/SearchBar";
 
 const EmployeesList = ({ itemEdit, setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -17,7 +25,6 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
   const search = React.useRef({ value: "" });
   const { ref, inView } = useInView();
   let counter = 1;
-
   //   use if with loadmore button and search bar
   const {
     data: result,
@@ -31,14 +38,14 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
     queryKey: ["Employees", search.current.value, store.isSearch, filterData],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
-        `${apiVersion}/employees/search`, // search endpoint
-        `${apiVersion}/employees/page/${pageParam}`, // list endpoint
+        ``, // search endpoint
+        `${apiVersion}/controllers/developers/employees/page.php?start=${pageParam}`, // list endpoint
         false,
         {
           filterData,
           searchValue: search?.current?.value,
         },
-        `post`,
+        "post",
       ),
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total) {
@@ -55,18 +62,43 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
       fetchNextPage();
     }
   }, [inView]);
-
   return (
     <>
+      <div className="flex items-center justify-between">
+        <div className="relative">
+          <label htmlFor="">Status</label>
+          <select
+            onChange={(e) => setFilterData(e.target.value)}
+            value={filterData}
+          >
+            <option value=""> All </option>
+            <option value="1"> Active </option>
+            <option value="0"> Inactive </option>
+          </select>
+        </div>
+        <SearchBar
+          search={search}
+          dispatch={dispatch}
+          store={store}
+          result={result?.pages}
+          isFetching={isFetching}
+          setOnSearch={setOnSearch}
+          onSearch={onSearch}
+        />
+      </div>
       <div className="relative pt-4 rounded-md">
-        {status !== "pending" && isFetching && <FetchingSpinner />}
+        {isFetching && <FetchingSpinner />}
         <table>
           <thead>
             <tr>
               <th>#</th>
               <th>Status</th>
-              <th>Employee Name</th>
-              <th>Email</th>
+              <th>Employee First Name</th>
+              <th>Employee Middle Name</th>
+              <th>Employee Last Name</th>
+              <th>Created</th>
+              <th>Date Update</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -82,6 +114,77 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
                   </td>
                 </tr>
               )}
+            {result?.pages?.map((page, key) => (
+              <React.Fragment key={key}>
+                {page?.data?.map((item, key) => {
+                  return (
+                    <tr key={key}>
+                      <td>{counter++}</td>
+                      <td>
+                        <Status
+                          text={`${
+                            item.employee_is_active == 1 ? "active" : "inactive"
+                          }`}
+                        />
+                      </td>
+                      <td>{item.employee_first_name}</td>
+                      <td> {item.employee_middle_name}</td>
+                      <td>{item.employee_last_name}</td>
+                      <td>{item.employee_email}</td>
+                      <td>
+                        {formatDate(item.employee_created, "--", "short-date")}
+                      </td>
+                      <td>
+                        {formatDate(item.employee_updated, "--", "short-date")}
+                      </td>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          {item.employees_is_active == 1 ? (
+                            <>
+                              <button
+                                type="button"
+                                className="tooltip-action-table"
+                                data-tooltip="edit"
+                                onClick={() => handleEdit(item)}
+                              >
+                                <FaEdit />
+                              </button>
+                              <button
+                                type="button"
+                                className="tooltip-action-table"
+                                data-tooltip="Archive"
+                                onClick={() => handleArchive(item)}
+                              >
+                                <FaArchive />
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button
+                                type="button"
+                                className="tooltip-action-table"
+                                data-tooltip="Restore"
+                                onClick={() => handleRestore(item)}
+                              >
+                                <FaTrashRestore />
+                              </button>
+                              <button
+                                type="button"
+                                className="tooltip-action-table"
+                                data-tooltip="Delete"
+                                onClick={() => handleDelete(item)}
+                              >
+                                <FaTrash />
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </React.Fragment>
+            ))}
             {error && (
               <tr>
                 <td colSpan="100%" className="p-10">
@@ -92,6 +195,47 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
           </tbody>
         </table>
       </div>
+
+      {store.isArchive && (
+        <ModalArchive
+          mysqlApiArchive={`${apiVersion}/controllers/developers/settings/employees/active.php?id=${itemEdit.employee_aid}`}
+          msg="Are you sure you want to archive this record?"
+          successMsg="Successfully archived."
+          item={itemEdit.employee_first_name}
+          item={itemEdit.employee_middle_name}
+          item={itemEdit.employee_last_name}
+          item={itemEdit.employee_email}
+          dataItem={itemEdit}
+          queryKey="employees"
+        />
+      )}
+
+      {store.isRestore && (
+        <ModalRestore
+          mysqlApiRestore={`${apiVersion}/controllers/developers/settings/employees/active.php?id=${itemEdit.employee_aid}`}
+          msg="Are you sure you want to restore this record?"
+          successMsg="Successfully restore."
+          item={itemEdit.employee_first_name}
+          item={itemEdit.employee_middle_name}
+          item={itemEdit.employee_last_name}
+          item={itemEdit.employee_email}
+          dataItem={itemEdit}
+          queryKey="employees"
+        />
+      )}
+      {store.isDelete && (
+        <ModalDelete
+          mysqlApiDelete={`${apiVersion}/controllers/developers/settings/employees/employees.php?id=${itemEdit.employee_aid}`}
+          msg="Are you sure you want to delete this record?"
+          successMsg="Successfully deleted."
+          item={itemEdit.employee_first_name}
+          item={itemEdit.employee_middle_name}
+          item={itemEdit.employee_last_name}
+          item={itemEdit.employee_email}
+          dataItem={itemEdit}
+          queryKey="employees"
+        />
+      )}
     </>
   );
 };

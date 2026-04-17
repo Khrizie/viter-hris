@@ -3,30 +3,30 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { FaTimes } from "react-icons/fa";
 import * as Yup from "yup";
-import { InputText } from "../../../../components/form-input/FormInputs";
-import { queryData } from "../../../../functions/custom-hooks/queryData";
-import { apiVersion } from "../../../../functions/functions-general";
-import MessageError from "../../../../partials/MessageError";
-import ModalWrapperSide from "../../../../partials/modals/ModalWrapperSide";
-import ButtonSpinner from "../../../../partials/spinners/ButtonSpinner";
+import { InputText } from "../../../components/form-input/FormInputs";
+import { queryData } from "../../../functions/custom-hooks/queryData";
+import { apiVersion } from "../../../functions/functions-general";
+import MessageError from "../../../partials/MessageError";
+import ModalWrapperSide from "../../../partials/modals/ModalWrapperSide";
+import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
 import {
   setError,
   setIsAdd,
   setMessage,
   setSuccess,
-} from "../../../../store/StoreAction";
-import { StoreContext } from "../../../../store/StoreContext";
+} from "../../../store/StoreAction";
+import { StoreContext } from "../../../store/StoreContext";
 
-const ModalAddRoles = ({ itemEdit }) => {
+const ModalAddEmployees = ({ itemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (values) =>
       queryData(
         itemEdit
-          ? `${apiVersion}/controllers/developers/settings/roles/roles.php?id=${itemEdit.role_aid}`
+          ? `${apiVersion}/controllers/developers/employees/employees.php?id=${itemEdit.employee_aid}`
           : //   update records
-            `${apiVersion}/controllers/developers/settings/roles/roles.php`,
+            `${apiVersion}/controllers/developers/employees/employees.php`,
         //   create records
         itemEdit
           ? "put" //put if update a records
@@ -34,7 +34,7 @@ const ModalAddRoles = ({ itemEdit }) => {
         values,
       ),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["roles"] });
+      queryClient.invalidateQueries({ queryKey: ["employees"] });
       if (data.success) {
         dispatch(setSuccess(true));
         dispatch(setMessage(`successfully${itemEdit ? "updated" : "added"}`));
@@ -48,13 +48,18 @@ const ModalAddRoles = ({ itemEdit }) => {
   });
   const initVal = {
     ...itemEdit,
-    role_name: itemEdit ? itemEdit.role_name : "",
-    role_description: itemEdit ? itemEdit.role_description : "",
+    employee_first_name: itemEdit ? itemEdit.employee_first_name : "",
+    employee_middle_name: itemEdit ? itemEdit.employee_middle_name : "",
+    employee_last_name: itemEdit ? itemEdit.employee_last_name : "",
+    employee_email: itemEdit ? itemEdit.employee_email : "",
 
-    role_name_old: itemEdit ? itemEdit.role_name : "",
+    employee_name_old: itemEdit ? itemEdit.employee_first_name : "",
   };
   const yupSchema = Yup.object({
-    role_name: Yup.string().trim().required("required."),
+    employee_first_name: Yup.string().trim().required("required."),
+    employee_middle_name: Yup.string().trim().required("required."),
+    employee_last_name: Yup.string().trim().required("required."),
+    employee_email: Yup.string().trim().required("required."),
   });
   const handleClose = () => {
     dispatch(setIsAdd(false));
@@ -73,7 +78,7 @@ const ModalAddRoles = ({ itemEdit }) => {
         {/* HEADER */}
         <div className="modal-header relative mb-4">
           <h3 className="text-dark text-sm">
-            {itemEdit ? "Update" : "Add"} Role
+            {itemEdit ? "Update" : "Add"} employee
           </h3>
           <button
             type="button"
@@ -101,21 +106,36 @@ const ModalAddRoles = ({ itemEdit }) => {
                     <div className="modal-container">
                       <div className="relative mt-5 mb-6">
                         <InputText
-                          label="name"
-                          name="role_name"
+                          label="First name"
+                          name="employee_first_name"
                           type="text"
                           disabled={mutation.isPending}
                         />
                       </div>
                       <div className="relative mt-5 mb-6">
                         <InputText
-                          label="Description"
-                          name="role_description"
+                          label="Middle name"
+                          name="employee_middle_name"
                           type="text"
                           disabled={mutation.isPending}
                         />
                       </div>
-
+                      <div className="relative mt-5 mb-6">
+                        <InputText
+                          label="Last name"
+                          name="employee_last_name"
+                          type="text"
+                          disabled={mutation.isPending}
+                        />
+                      </div>
+                      <div className="relative mt-5 mb-6">
+                        <InputText
+                          label="Email"
+                          name="employee_email"
+                          type="text"
+                          disabled={mutation.isPending}
+                        />
+                      </div>
                       {store.error && <MessageError />}
                     </div>
 
@@ -153,4 +173,4 @@ const ModalAddRoles = ({ itemEdit }) => {
   );
 };
 
-export default ModalAddRoles;
+export default ModalAddEmployees;

@@ -17,4 +17,3 @@ isNameExist($val, $val->role_name);
 $query = checkCreate($val);
 http_response_code(200);
 returnSuccess($val, "Roles Create", $query);
-

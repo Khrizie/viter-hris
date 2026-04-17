@@ -29,7 +29,7 @@ export const routeDeveloper = [
     ),
   },
   {
-    path: `${devNavUrl}/${urlDeveloper}/settings/roles`,
+    path: `${devNavUrl}/${urlDeveloper}/settings/role`,
     element: (
       <>
         <Roles />
