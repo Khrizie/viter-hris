@@ -58,7 +58,7 @@ const EmployeesList = ({ itemEdit, setItemEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["employees", search.current.value, store.isSearch, filterData],
+    queryKey: ["employee", search.current.value, store.isSearch, filterData],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
         ``, // search endpoint

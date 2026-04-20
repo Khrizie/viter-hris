@@ -24,7 +24,7 @@ compareName($val, //models
 
 $query = checkUpdate($val);
 http_response_code(200);
-returnSuccess($val, "Employees Update", $query);
+returnSuccess($val, "employee Update", $query);
 }
 
 checkEndPoint();

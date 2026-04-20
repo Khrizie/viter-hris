@@ -54,6 +54,9 @@ const ModalAddEmployees = ({ itemEdit }) => {
     employee_email: itemEdit ? itemEdit.employee_email : "",
 
     employee_first_name_old: itemEdit ? itemEdit.employee_first_name : "",
+    employee_middle_name_old: itemEdit ? itemEdit.employee_middle_name : "",
+    employee_last_name_old: itemEdit ? itemEdit.employee_last_name : "",
+    employee_email_old: itemEdit ? itemEdit.employee_email : "",
   };
   const yupSchema = Yup.object({
     employee_first_name: Yup.string().trim().required("required."),

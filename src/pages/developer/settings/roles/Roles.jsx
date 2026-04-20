@@ -28,7 +28,7 @@ const Roles = () => {
               onClick={handleAdd}
             >
               <FaPlus className="text-primary" />
-              add
+              Add
             </button>
           </div>
         </div>
