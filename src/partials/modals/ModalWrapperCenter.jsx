@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { handleEscape } from "../../functions/functions-general";
+=======
+import { handleEscape } from "@/components/helpers/functions-general";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 import React from "react";
 
 const ModalWrapperCenter = ({

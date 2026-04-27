@@ -1,16 +1,28 @@
+<<<<<<< HEAD
 import { handleEscape, isEmptyItem } from "../../functions/functions-general";
 
+=======
+import { queryData } from "../../functions/custom-hooks/queryData";
+import { handleEscape, isEmptyItem } from "../../functions/functions-general";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 import {
   setError,
   setIsRestore,
   setMessage,
   setSuccess,
 } from "../../store/StoreAction";
+<<<<<<< HEAD
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { FaQuestion } from "react-icons/fa";
 import { queryData } from "../../functions/custom-hooks/queryData";
 import { StoreContext } from "../../store/StoreContext";
+=======
+import { StoreContext } from "../../store/StoreContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { FaQuestion } from "react-icons/fa";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 import MessageError from "../MessageError";
 import ButtonSpinner from "../spinners/ButtonSpinner";
 

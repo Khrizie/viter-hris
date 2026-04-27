@@ -19,7 +19,11 @@
     "react-icons": "^5.6.0",
     "react-intersection-observer": "^10.0.3",
     "react-number-format": "^5.4.5",
+<<<<<<< HEAD
     "react-router-dom": "^7.14.0",
+=======
+    "react-router-dom": "^7.14.1",
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
     "tailwindcss": "^4.2.2",
     "yup": "^1.7.1"
   },

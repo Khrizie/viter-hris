@@ -1,6 +1,7 @@
 <?php
 
 //check database connection
+<<<<<<< HEAD
 
 $conn = null;
 $conn = checkDBConnection();
@@ -31,3 +32,31 @@ if (array_key_exists("id", $_GET)) {
 
 
 checkEndpoint();
+=======
+$conn = null;
+$conn = checkDbConnection();
+//make use of classes for save database
+$val = new Roles ($conn);
+
+if(array_key_exists("id",$_GET)){
+$val->role_aid = $_GET ['id'];
+$val->role_name = $data['role_name'];
+$val->role_description =$data['role_description'];
+$val->role_updated = date("Y-m-d H:i:s");
+
+$role_name_old = $data['role_name_old'];
+
+// Validations
+checkId($val->role_aid);
+compareName($val, //models
+    $role_name_old, //old record
+    $val->role_name //new record
+);
+
+$query = checkUpdate($val);
+http_response_code(200);
+returnSuccess($val, "Roles Update", $query);
+}
+
+checkEndPoint();
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874

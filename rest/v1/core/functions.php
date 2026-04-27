@@ -2,6 +2,7 @@
 
 require 'Database.php';
 require 'Response.php';
+<<<<<<< HEAD
 
 function checkDBConnection()
 {
@@ -22,6 +23,40 @@ function checkDBConnection()
 }
 
 
+=======
+require 'header.php';
+
+function sendResponse($result) {
+    $response = new Response();
+    $response->setSuccess(true);
+    $response->setStatusCode(200);
+    $response->setData($result);
+    $response->send();
+
+}
+function checkDbConnection() {
+   try {
+        $conn = Database::connectDb(); 
+        return $conn;
+
+   } catch(PDOException $error) {
+
+        $response = new Response(); 
+
+        $err = [];
+        $err['type'] = 'invalid_request_error';
+        $err['success'] = false;
+        $err['error'] = 'Database connection failed';
+        $err['message'] = $error->getMessage();
+
+        $response->setSuccess(false);
+        $response->setData($err);
+        $response->send();
+        exit;
+   }
+}
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 function checkApiKey()
 {
     // validate apikey
@@ -321,6 +356,7 @@ function getResultData($query)
     return $data;
 }
 
+<<<<<<< HEAD
 // send response
 function sendResponse($result)
 {
@@ -330,6 +366,8 @@ function sendResponse($result)
     $response->setData($result);
     $response->send();
 }
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 
 // forbidden access
 function checkAccess()
@@ -448,6 +486,23 @@ function returnSuccess($object, $name, $query, $data = "")
     exit;
 }
 
+<<<<<<< HEAD
+=======
+// return error
+function returnError($msg)
+{
+    $response = new Response();
+    $error = [];
+    $response->setSuccess(false);
+    $error["count"] = 0;
+    $error["success"] = false;
+    $error['error'] = $msg;
+    $response->setData($error);
+    $response->send();
+    exit;
+}
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 // return handle Error
 function returnHandleError(
     $msg,
@@ -638,6 +693,7 @@ function isEmptyItem($val, $secondVal = '')
     if ($val) return $val;
     return $secondVal;
 }
+<<<<<<< HEAD
 
 // return error
 function returnError($msg)
@@ -652,3 +708,5 @@ function returnError($msg)
     $response->send();
     exit;
 }
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874

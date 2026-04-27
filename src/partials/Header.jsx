@@ -37,7 +37,11 @@ const Header = () => {
               />
             </button>
             <div className="pl-1">
+<<<<<<< HEAD
               <img src="asd" alt="" />
+=======
+              <img src="LOGO" alt="LOGO" />
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             </div>
           </div>
         </div>
@@ -80,7 +84,11 @@ const Header = () => {
                 {/* {store.credentials.data.role_code !== "r_is_donor" && (
                   <li className="flex items-center gap-2 hover:text-primary">
                     <MdOutlineAccountCircle />
+<<<<<<< HEAD
                     <Link to={${link}/account} className="w-full">
+=======
+                    <Link to={`${link}/account`} className="w-full">
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                       Account
                     </Link>
                   </li>

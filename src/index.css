@@ -1,12 +1,18 @@
 @import "tailwindcss";
 
 @font-face {
+<<<<<<< HEAD
   font-family: "poppins";
   src: url("/font/poppins-regular.woff");
+=======
+  font-family: "Poppins";
+  src: url("/fonts/poppins-regular.woff");
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   font-style: normal;
   font-display: swap;
 }
 
+<<<<<<< HEAD
 /* @theme closed properly after custom properties only */
 @theme {
   --color-primary: #b41d64;
@@ -22,6 +28,10 @@
   --animate-slideDown: slideDown 0.2s ease-in-out;
   --animate-loading: loading 1.5s ease-in-out infinite;
 
+=======
+@theme {
+  --color-primary: #b41d64;
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   --color-secondary: rgb(66 177 201);
   --color-accent: rgb(35 142 192);
   --color-accent-light: rgb(240 204 126);
@@ -41,8 +51,22 @@
   --color-dark-blue: rgb(22 85 115);
 
   --font-poppins: "poppins", sans-serif;
+<<<<<<< HEAD
 
   /* all keyframes outside @theme */
+=======
+  --font-sans: "poppins", sans-serif;
+  --font-poppins: "poppins", sans-serif;
+  --font-dmsans-regular: "poppins", sans-serif;
+  --default-font-family: "poppins", var(--font-sans);
+  --animate-shake: shake 0.2s ease-in-out;
+  --animate-fadeIn: fadeIn 0.2s ease-in-out;
+  --animate-fadeOut: fadeOut 0.2s ease-in-out;
+  --animate-slideUp: slideUp 0.2s ease-in-out;
+  --animate-slideDown: slideDown 0.2s ease-in-out;
+  --animate-loading: loading 1.5s ease-in-out infinite;
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   @keyframes shake {
     0% {
       transform: translateX(0);
@@ -84,8 +108,12 @@
       transform: translateY(0px);
     }
   }
+<<<<<<< HEAD
   /* named slideDown — was missing a name before */
   @keyframes slideDown {
+=======
+  @keyframes {
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
     0% {
       transform: translateY(0px);
     }
@@ -156,7 +184,11 @@
     @apply block border border-solid border-gray-300 p-2 rounded-lg w-full h-28 bg-transparent outline-none;
   }
   label {
+<<<<<<< HEAD
     @apply text-xs text-primary transform -translate-y-6 -translate-x-1 absolute left-3 top-4 px-1 z-10 isolate;
+=======
+    @apply text-xs text-primary transform -translate-y-6 -translate-x-1 absolute left-3 top-4 px-1  z-10 isolate;
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   }
   label:after {
     @apply content-[''] w-[97%] h-[2.5px] absolute left-px top-[7.2px] bg-white -z-10;
@@ -230,7 +262,11 @@
 
 @layer components {
   .wrapper {
+<<<<<<< HEAD
     @apply relative min-h-[100dvh] print:pt-0 pt-20 ml-58 pr-6 pl-4 transition-all duration-150 ease-linear;
+=======
+    @apply relative min-h-[100dvh] print:pt-0 pt-20 ml-56 pr-6 pl-4 transition-all duration-150 ease-linear;
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   }
   .navigation {
     @apply fixed left-0 top-0 mt-[50px] z-50;
@@ -238,6 +274,12 @@
   .nav {
     @apply flex items-center;
   }
+<<<<<<< HEAD
+=======
+  /* .wrapper.show-navigation {
+    @apply lg:ml-48;
+  } */
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   .wrapper.isDemoMode {
     @apply min-h-[calc(100vh-36px)];
   }
@@ -262,8 +304,15 @@
   .modal-form-container {
     @apply h-full flex flex-col justify-between overflow-y-auto pr-4;
   }
+<<<<<<< HEAD
   .modal__wrapper,
   .backdrop:last-of-type {
+=======
+  /* MAKE LAST BACKDROP TO SHOW BG OVERLAY */
+  .modal__wrapper,
+  .backdrop:last-of-type {
+    /* @apply last-of-type:bg-dark/30; */
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
     @apply bg-dark/30;
   }
   .backdrop:last {
@@ -275,6 +324,10 @@
   .modal-container {
     @apply mt-3;
   }
+<<<<<<< HEAD
+=======
+  /* Header */
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   .header {
     @apply fixed w-full py-3 md:py-4 bg-gradient-to-b from-black/80 to-black/60 backdrop-blur-md z-50 isolate;
   }
@@ -294,14 +347,27 @@
     @apply h-[100dvh];
   }
   .header__nav {
+<<<<<<< HEAD
     @apply lg:static lg:w-auto lg:h-auto lg:bg-transparent fixed top-[75px] left-0 w-full h-0 bg-white z-50 overflow-hidden lg:overflow-visible transition-all duration-500 text-base;
+=======
+    @apply lg:static lg:w-auto lg:h-auto lg:bg-transparent 
+         fixed top-[75px] left-0 w-full h-0 bg-white z-50 
+         overflow-hidden lg:overflow-visible transition-all duration-500 text-base;
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   }
   .header__nav ul {
     @apply lg:flex-row lg:mt-0 flex flex-col items-start px-5 mt-[60px];
   }
   .header__nav ul li a {
+<<<<<<< HEAD
     @apply text-xl lg:text-base text-sage hover:text-green font-dmsans-regular;
   }
+=======
+    @apply text-xl lg:text-base text-sage hover:text-green font-poppins;
+  }
+
+  /* Toggle menu */
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   .toggle-menu {
     @apply hidden md:block;
   }
@@ -320,15 +386,27 @@
   .toggle-menu.active span:nth-child(3) {
     @apply -rotate-45 -translate-y-3.5;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   .page__banner {
     @apply relative isolate min-h-[45vh] md:min-h-[40vh] lg:min-h-[30vh];
   }
   .page__banner img {
+<<<<<<< HEAD
     @apply absolute inset-x-0 w-full lg:h-[50vh] object-cover -z-10 md:static h-[45vh];
+=======
+    @apply absolute inset-x-0 w-full lg:h-[50vh] object-cover -z-10  md:static h-[45vh];
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   }
   .page__banner__content {
     @apply absolute left-1/2 md:bottom-[15%] -translate-x-[50%] md:-translate-x-1/2 -translate-y-1/3 z-50 bottom-[2%];
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   .stories {
     @apply md:py-20 lg:py-[8rem] py-6;
   }
@@ -344,6 +422,10 @@
   .support {
     @apply py-[50px] md:py-[100px] bg-sage text-center;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   .dropdown__menu {
     @apply relative;
   }
@@ -382,6 +464,7 @@
   .tooltip-action-table:hover::after {
     @apply opacity-100 scale-100;
   }
+<<<<<<< HEAD
   .btn-action-table svg {
     @apply fill-gray-800/70;
   }
@@ -391,6 +474,21 @@
   .btn--green {
     @apply bg-green text-white hover:bg-[#2e6c58];
   }
+=======
+
+  .btn-action-table svg {
+    @apply fill-gray-800/70;
+  }
+
+  .btn {
+    @apply px-[18px] py-[14px] bg-white rounded-full text-black border border-transparent  items-center gap-[15px] transition-all duration-500 cursor-pointer min-w-[180px] justify-center text-base font-dmsans-regular;
+  }
+
+  .btn--green {
+    @apply bg-green text-white hover:bg-[#2e6c58];
+  }
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   .btn--outline {
     @apply bg-transparent text-green border border-green hover:bg-green hover:text-white inline-flex;
   }

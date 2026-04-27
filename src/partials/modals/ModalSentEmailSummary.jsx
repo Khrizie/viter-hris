@@ -8,7 +8,11 @@ const ModalSentEmailSummary = ({
   queryStatus,
   messageSuccessText = null,
 }) => {
+<<<<<<< HEAD
   let successCount = queryCount;
+=======
+  let sucessCount = queryCount;
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   let totalCount = recipientList?.length;
   let message = queryStatus?.success
     ? messageSuccessText
@@ -38,7 +42,11 @@ const ModalSentEmailSummary = ({
 
             {totalCount > 1 && (
               <span className="text-sm">
+<<<<<<< HEAD
                 {successCount} of {totalCount}
+=======
+                {sucessCount} of {totalCount}
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
               </span>
             )}
             <button

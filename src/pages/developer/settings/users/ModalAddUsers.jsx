@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { StoreContext } from "../../../../store/StoreContext";
 import * as Yup from "yup";
@@ -20,6 +21,29 @@ import {
 } from "../../../../components/form-inputs/FormInputs";
 import ButtonSpinner from "../../../../partials/spinners/ButtonSpinner";
 import MessageError from "../../../../partials/MessageError";
+=======
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { FaTimes } from "react-icons/fa";
+import * as Yup from "yup";
+import {
+  InputSelect,
+  InputText,
+} from "../../../../components/form-input/FormInputs";
+import { queryData } from "../../../../functions/custom-hooks/queryData";
+import { apiVersion } from "../../../../functions/functions-general";
+import ModalWrapperSide from "../../../../partials/modals/ModalWrapperSide";
+import ButtonSpinner from "../../../../partials/spinners/ButtonSpinner";
+import {
+  setError,
+  setIsAdd,
+  setMessage,
+  setSuccess,
+} from "../../../../store/StoreAction";
+import { StoreContext } from "../../../../store/StoreContext";
+import MessageError from "../../../../partials/MessageError";
+import { Form, Formik } from "formik";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 
 const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -31,19 +55,35 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
     mutationFn: (values) =>
       queryData(
         itemEdit
+<<<<<<< HEAD
           ? `${apiVersion}/controllers/developers/settings/users/users.php?id=${itemEdit.users_aid}` //update records
           : `${apiVersion}/controllers/developers/settings/users/users.php`, //create records
         itemEdit
           ? "put" //put if update a records and post if create new record
+=======
+          ? `${apiVersion}/controllers/developers/settings/users/users.php?id=${itemEdit.users_aid}`
+          : //   update records
+            `${apiVersion}/controllers/developers/settings/users/users.php`,
+        //   create records
+        itemEdit
+          ? "put" //put if update a records
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
           : "post", // and post if create new record
         values,
       ),
     onSuccess: (data) => {
+<<<<<<< HEAD
       queryClient.invalidateQueries({ queryKey: ["users"] });
 
       if (data.success) {
         dispatch(setSuccess(true));
         dispatch(setMessage(`Successfully ${itemEdit ? "updated" : "added"}`));
+=======
+      queryClient.invalidateQueries({ queryKey: ["roles"] });
+      if (data.success) {
+        dispatch(setSuccess(true));
+        dispatch(setMessage(`successfully${itemEdit ? "updated" : "added"}`));
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
         dispatch(setIsAdd(false));
       }
       if (data.success == false) {
@@ -52,7 +92,10 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
       }
     },
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   const initVal = {
     ...itemEdit,
     users_role_id: itemEdit ? itemEdit.users_role_id : "",
@@ -61,6 +104,7 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
     users_password: itemEdit ? itemEdit.users_password : "",
     users_email: itemEdit ? itemEdit.users_email : "",
 
+<<<<<<< HEAD
     users_first_name_old: itemEdit ? itemEdit.users_first_name : "",
     users_last_name_old: itemEdit ? itemEdit.users_last_name : "",
     users_email_old: itemEdit ? itemEdit.users_email : "",
@@ -73,6 +117,18 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
       .trim()
       .email("Invalid email")
       .required("required"),
+=======
+    users_email_old: itemEdit ? itemEdit.users_email : "",
+  };
+  const yupSchema = Yup.object({
+    users_role_id: Yup.string().trim().required("required."),
+    users_first_name: Yup.string().trim().required("required."),
+    users_last_name: Yup.string().trim().required("required."),
+    users_email: Yup.string()
+      .trim()
+      .email("Invalid email.")
+      .required("required."),
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
   });
   const handleClose = () => {
     dispatch(setIsAdd(false));
@@ -88,10 +144,17 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
         handleClose={handleClose}
         className="transition-all ease-in-out transform duration-200"
       >
+<<<<<<< HEAD
         {/* header */}
         <div className="moda-header relative mb-4">
           <h3 className="text-dark text-sm">
             {itemEdit ? "Update" : "Add"} Users
+=======
+        {/* HEADER */}
+        <div className="modal-header relative mb-4">
+          <h3 className="text-dark text-sm">
+            {itemEdit ? "Update" : "Add"} Role
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
           </h3>
           <button
             type="button"
@@ -101,7 +164,11 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
             <FaTimes />
           </button>
         </div>
+<<<<<<< HEAD
         {/* body */}
+=======
+        {/* BODY */}
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
         <div className="modal-body">
           <Formik
             initialValues={initVal}
@@ -112,12 +179,20 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
             }}
           >
             {(props) => {
+<<<<<<< HEAD
+=======
+              console.log(props);
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
               return (
                 <Form className="h-full">
                   <div className="modal-form-container">
                     <div className="modal-container">
+<<<<<<< HEAD
                       {/* name */}
                       <div className="relative mb-6">
+=======
+                      <div className="relative mt-5 mb-6">
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                         <InputText
                           label="First Name"
                           name="users_first_name"
@@ -125,7 +200,10 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
                           disabled={mutation.isPending}
                         />
                       </div>
+<<<<<<< HEAD
                       {/* description */}
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                       <div className="relative mt-5 mb-6">
                         <InputText
                           label="Last Name"
@@ -142,7 +220,10 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
                           disabled={mutation.isPending}
                         />
                       </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                       <div className="relative mt-5 mb-6">
                         <InputSelect
                           label="Role"
@@ -164,10 +245,17 @@ const ModalAddUsers = ({ itemEdit, filterArrayActiveRoles }) => {
                           </optgroup>
                         </InputSelect>
                       </div>
+<<<<<<< HEAD
                       {store.error && <MessageError />}
                     </div>
 
                     {/* buttons */}
+=======
+
+                      {store.error && <MessageError />}
+                    </div>
+
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                     <div className="modal-action">
                       <button
                         type="submit"

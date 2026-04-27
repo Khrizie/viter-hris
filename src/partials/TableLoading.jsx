@@ -16,7 +16,11 @@ const TableLoading = ({ count = null, cols = null, className = "h-[7px]" }) => {
       <div
         key={i}
         className={`${className} bg-gray-300 p-1.5 w-full rounded-md relative loading-bar overflow-hidden`}
+<<<<<<< HEAD
       ></div>,
+=======
+      ></div>
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
     );
   }
 

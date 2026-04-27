@@ -6,11 +6,19 @@ const ModalSendingEmailStatus = ({
   totalCountItem = null,
   modalMessage = null,
 }) => {
+<<<<<<< HEAD
   let successCount = queryCount;
   let totalCount = totalCountItem ? totalCountItem : recipientList?.length;
   let percentageValue = (successCount / totalCount) * 100;
 
   // console.log(successCount / totalCount);
+=======
+  let sucessCount = queryCount;
+  let totalCount = totalCountItem ? totalCountItem : recipientList?.length;
+  let percentageValue = (sucessCount / totalCount) * 100;
+
+  // console.log(sucessCount / totalCount);
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 
   React.useEffect(() => {
     history.pushState(null, null, location.href);
@@ -34,7 +42,11 @@ const ModalSendingEmailStatus = ({
           </span>
           {totalCount > 1 && (
             <span className="text-sm">
+<<<<<<< HEAD
               {successCount} of {totalCount}
+=======
+              {sucessCount} of {totalCount}
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             </span>
           )}
           <div className="w-full bg-gray-200 rounded-sm dark:bg-gray-400 h-5 relative">

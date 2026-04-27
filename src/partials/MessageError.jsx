@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // import { setError, setMessage } from "@/store/StoreAction";
 // import { StoreContext } from "@/store/StoreContext";
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 import React from "react";
 import { FaTimes } from "react-icons/fa";
 import { StoreContext } from "../store/StoreContext";

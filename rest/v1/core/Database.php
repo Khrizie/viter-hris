@@ -5,7 +5,11 @@ class Database
     private static $dbConnection;
 
     public static function connectDb()
+<<<<<<< HEAD
     {
+=======
+    { 
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
         // Localhost
         $host = "localhost";
         $dbname = "viter_hris_v1";
@@ -20,4 +24,8 @@ class Database
 
         return self::$dbConnection;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874

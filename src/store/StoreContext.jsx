@@ -33,7 +33,11 @@ const initVal = {
       role: "developer",
       role_code: "r_is_developer",
       user_first_name: "John",
+<<<<<<< HEAD
       user_last_name: "Doe",
+=======
+      user_last_name: "John",
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
       user_email: "john@gmail.com",
     },
   },

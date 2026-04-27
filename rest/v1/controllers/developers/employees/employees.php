@@ -1,12 +1,19 @@
 <?php
 
+<<<<<<< HEAD
 //set http header
 require '../../../core/header.php';
 // use needed funcions
+=======
+//  set http header
+require '../../../core/header.php';
+// use needed functions
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 require '../../../core/functions.php';
 // use models
 require '../../../models/developers/employees/Employees.php';
 
+<<<<<<< HEAD
 //get payload from frontend
 $body = file_get_contents("php://input");
 $data = json_decode($body, true);
@@ -37,4 +44,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     $result = require 'delete.php';
     sendResponse($result);
     exit;
+=======
+
+//get payload from frontend
+$body = file_get_contents('php://input');
+$data = json_decode($body, true);
+
+
+//Create/post
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+   $result = require 'create.php';
+   sendResponse($result);
+   exit;
+}
+//Read/get
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+   $result = require 'page.php';
+   sendResponse($result);
+   exit;
+}
+//Update/put
+if($_SERVER['REQUEST_METHOD'] === 'PUT') {
+   $result = require 'update.php';
+   sendResponse($result);
+   exit;
+}
+//delete/put
+if($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+   $result = require 'delete.php';
+   sendResponse($result);
+   exit;
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 }

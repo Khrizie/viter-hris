@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 //set http header
 require '../../../../core/header.php';
 // use needed funcions
@@ -23,11 +24,48 @@ if (array_key_exists('id', $_GET)) {
     $val->role_updated = date("Y-m-d H:m:s");
 
     //validate is id
+=======
+//  set http header
+require '../../../../core/header.php';
+// use needed functions
+require '../../../../core/functions.php';
+// use models
+require '../../../../models/developers/settings/roles/Roles.php';
+
+//check database connection
+$conn = null;
+$conn = checkDbConnection();
+//make use of classes for save database
+// store models into var
+$val = new Roles ($conn);
+
+//get payload from frontend
+$body = file_get_contents('php://input');
+$data = json_decode($body, true);
+
+if(array_key_exists('id', $_GET)){
+    // check data if exist and data is required
+    checkPayload($data);
+    $val->role_aid = $_GET['id'];
+    $val->role_is_active = trim($data['isActive']);
+    $val->role_updated = date('Y-m-d H:m:s');
+
+    // validate is id
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
     checkId($val->role_aid);
 
     $query = checkActive($val);
     http_response_code(200);
+<<<<<<< HEAD
     returnSuccess($val, 'role active', $query);
 }
 // return 404 if endpoint not available
 checkEndpoint();
+=======
+    returnSuccess($val,'role_is_active',$query);
+
+}
+
+// return 404 if endpoint is not available
+checkEndpoint();
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874

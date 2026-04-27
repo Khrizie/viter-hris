@@ -1,8 +1,17 @@
 RewriteEngine On
+<<<<<<< HEAD
 
 # use for authentication
 
+=======
+# use for authentication
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 RewriteCond %{HTTP:Authorization} ^(.+)$
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+<<<<<<< HEAD
+=======
+
+Header set Access-Control-Allow-Origin *
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874

@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 // import { queryData } from "@/components/custom-hooks/queryData";
 import { handleEscape, isEmptyItem } from "../../functions/functions-general";
 
+=======
+import { queryData } from "../../functions/custom-hooks/queryData";
+import { handleEscape, isEmptyItem } from "../../functions/functions-general";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 import {
   setError,
   setIsDelete,
@@ -8,14 +13,20 @@ import {
   setSuccess,
 } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { FaQuestion } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import MessageError from "../MessageError";
 import ButtonSpinner from "../spinners/ButtonSpinner";
+<<<<<<< HEAD
 import { queryData } from "../../functions/custom-hooks/queryData";
+=======
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
 
 const ModalDelete = ({
   mysqlApiDelete,

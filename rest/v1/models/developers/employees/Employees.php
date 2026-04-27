@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -7,6 +8,11 @@
 
 class Employees
 {
+=======
+<?php
+
+class Employees {
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
     public $employee_aid;
     public $employee_is_active;
     public $employee_first_name;
@@ -25,16 +31,26 @@ class Employees
 
     public $tblEmployees;
 
+<<<<<<< HEAD
     public function __construct($db)
     {
+=======
+    public function __construct($db){
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
         $this->connection = $db;
         $this->tblEmployees = "employees";
     }
 
+<<<<<<< HEAD
     public function create()
     {
         try {
             $sql = "insert into {$this->tblEmployees}";
+=======
+    public function create(){
+        try {
+            $sql = "insert into {$this->tblEmployees} ";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $sql .= " ( ";
             $sql .= " employee_is_active, ";
             $sql .= " employee_first_name, ";
@@ -43,7 +59,11 @@ class Employees
             $sql .= " employee_email, ";
             $sql .= " employee_created, ";
             $sql .= " employee_updated ";
+<<<<<<< HEAD
             $sql .= ") values (";
+=======
+            $sql .= " ) values ( ";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $sql .= " :employee_is_active, ";
             $sql .= " :employee_first_name, ";
             $sql .= " :employee_middle_name, ";
@@ -63,18 +83,90 @@ class Employees
                 "employee_updated" => $this->employee_updated,
             ]);
             $this->lastInsertedId = $this->connection->lastInsertId();
+<<<<<<< HEAD
         } catch (PDOException $e) {
+=======
+        } catch (PDOException $e){
+            returnError($e);
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = false;
         }
         return $query;
     }
+<<<<<<< HEAD
     public function readAll()
     {
         try {
+=======
+
+    // public function readAll(){
+    //     try{
+    //         $sql = "select ";
+    //         $sql .= " * ";
+    //         $sql .= " from {$this->tblEmployees} ";
+    //         $sql .= " where true ";
+    //         $sql .= $this->employee_is_active != "" ? " and employee_is_active = :employee_is_active" : " ";
+    //         $sql .= $this->search != "" ? " and ( " : " ";
+    //         $sql .= $this->search != "" ? " employee_first_name like :employee_first_name " : " ";
+    //         $sql .= $this->search != "" ? " or employee_middle_name like :employee_middle_name " : " ";
+    //         $sql .= $this->search != "" ? " or employee_last_name like :employee_last_name " : " ";
+    //         $sql .= $this->search != "" ? " or employee_email like :employee_email " : " ";
+    //         $sql .= $this->search != "" ? " ) " : " ";
+    //         $query = $this->connection->prepare($sql);
+    //         $query->execute([
+    //            ...$this->employee_is_active != "" ? ["employee_is_active" => $this->employee_is_active ] : [],
+    //             ...$this->search != "" ? [
+    //                 "employee_first_name" => "%{$this->search}%", 
+    //                 "employee_middle_name" => "%{$this->search}%", 
+    //                 "employee_last_name" => "%{$this->search}%", 
+    //                 "employee_email" => "%{$this->search}%",  
+    //                 ] : [],
+    //         ]);
+    //     } catch(PDOException $e){
+    //         $query = false;
+    //     }
+    //     return $query;
+    // }
+    // public function readLimit(){
+    //     try{
+    //         $sql = "select ";
+    //         $sql .= " * ";
+    //         $sql .= " from {$this->tblEmployees} ";
+    //         $sql .= " where true ";
+    //         $sql .= $this->employee_is_active != "" ? " and employee_is_active = :employee_is_active" : " ";
+    //         $sql .= $this->search != "" ? " and ( " : " ";
+    //         $sql .= $this->search != "" ? " employee_first_name like :employee_first_name " : " ";
+    //         $sql .= $this->search != "" ? " or employee_middle_name like :employee_middle_name " : " ";
+    //         $sql .= $this->search != "" ? " or employee_last_name like :employee_last_name " : " ";
+    //         $sql .= $this->search != "" ? " or employee_email like :employee_email " : " ";
+    //         $sql .= $this->search != "" ? " ) " : " ";
+    //         $sql .= " limit :start, ";
+    //         $sql .= " :total ";
+    //         $query = $this->connection->prepare($sql);
+    //         $query->execute([
+    //             "start" => $this->start -1,
+    //             "total" => $this->total,
+    //             ...$this->employee_is_active != "" ? ["employee_is_active" => $this->employee_is_active ] : [],
+    //             ...$this->search != "" ? [
+    //                 "employee_first_name" => "%{$this->search}%", 
+    //                 "employee_middle_name" => "%{$this->search}%", 
+    //                 "employee_last_name" => "%{$this->search}%", 
+    //                 "employee_email" => "%{$this->search}%",  
+    //                 ] : [],
+    //         ]);
+    //     } catch(PDOException $e){
+    //         $query = false;
+    //     }
+    //     return $query;
+    // }
+ public function readAll(){
+        try{
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $sql = "select ";
             $sql .= " * ";
             $sql .= " from {$this->tblEmployees} ";
             $sql .= " where true ";
+<<<<<<< HEAD
             $sql .= $this->employee_is_active ?  " and employee_is_active = :employee_is_active " : " ";
             $sql .= $this->search != '' ? " and ( " : " ";
             $sql .= $this->search != '' ? " employee_first_name like :employee_first_name " : " ";
@@ -290,6 +382,10 @@ class Employees
             $sql .= " where true ";
             $sql .= $this->employee_is_active
                 ? " and employee_is_active = :employee_is_active "
+=======
+            $sql .= $this->employee_is_active != ""
+                ? " and employee_is_active = :employee_is_active " 
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                 : " ";
             $sql .= $this->search != "" ? " and ( " : " ";
             $sql .= $this->search != "" ? " employee_first_name like :employee_first_name " : " ";
@@ -299,28 +395,49 @@ class Employees
             $sql .= $this->search != "" ? " ) " : " ";
             $query = $this->connection->prepare($sql);
             $query->execute([
+<<<<<<< HEAD
                 ...$this->employee_is_active ? ["employee_is_active" => $this->employee_is_active] : [],
                 ...$this->search ? [
+=======
+                ...$this->employee_is_active != "" ? ["employee_is_active" => $this->employee_is_active] : [],
+                ...$this->search != "" ? [
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                     "employee_first_name" => "%{$this->search}%",
                     "employee_middle_name" => "%{$this->search}%",
                     "employee_last_name" => "%{$this->search}%",
                     "employee_email" => "%{$this->search}%",
+<<<<<<< HEAD
                 ] : [],
             ]);
         } catch (PDOException $e) {
+=======
+                    ] : [],
+            ]);
+        }catch(PDOException $e){
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = false;
         }
         return $query;
     }
+<<<<<<< HEAD
     public function readLimit()
     {
         try {
+=======
+    
+    public function readLimit(){
+        try{
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $sql = "select ";
             $sql .= " * ";
             $sql .= " from {$this->tblEmployees} ";
             $sql .= " where true ";
             $sql .= $this->employee_is_active != ""
+<<<<<<< HEAD
                 ? " and employee_is_active = :employee_is_active "
+=======
+                ? " and employee_is_active = :employee_is_active " 
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
                 : " ";
             $sql .= $this->search != "" ? " and ( " : " ";
             $sql .= $this->search != "" ? " employee_first_name like :employee_first_name " : " ";
@@ -340,13 +457,20 @@ class Employees
                     "employee_middle_name" => "%{$this->search}%",
                     "employee_last_name" => "%{$this->search}%",
                     "employee_email" => "%{$this->search}%",
+<<<<<<< HEAD
                 ] : [],
             ]);
         } catch (PDOException $e) {
+=======
+                    ] : [],
+            ]);
+        }catch(PDOException $e){
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = false;
         }
         return $query;
     }
+<<<<<<< HEAD
     public function update()
     {
         try {
@@ -357,6 +481,19 @@ class Employees
             $sql .= " employee_email = :employee_email, ";
             $sql .= " employee_updated = :employee_updated ";
             $sql .= " where employee_aid = :employee_aid ";
+=======
+
+    public function update(){
+        try{
+            $sql = "UPDATE {$this->tblEmployees} SET ";
+            $sql .= "employee_first_name = :employee_first_name, "; 
+            $sql .= "employee_middle_name = :employee_middle_name, "; 
+            $sql .= "employee_last_name = :employee_last_name, "; 
+            $sql .= "employee_email = :employee_email, ";
+            $sql .= "employee_updated = :employee_updated ";
+            $sql .= "where employee_aid = :employee_aid"; 
+            
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "employee_first_name" => $this->employee_first_name,
@@ -366,12 +503,19 @@ class Employees
                 "employee_updated" => $this->employee_updated,
                 "employee_aid" => $this->employee_aid,
             ]);
+<<<<<<< HEAD
         } catch (PDOException $e) {
             // returnError($e); turn on when debugging
+=======
+
+        } catch(PDOException $e){
+            returnError($e);
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = false;
         }
         return $query;
     }
+<<<<<<< HEAD
     public function active()
     {
         try {
@@ -379,48 +523,94 @@ class Employees
             $sql .= " employee_is_active = :employee_is_active, ";
             $sql .= " employee_updated = :employee_updated ";
             $sql .= " where employee_aid = :employee_aid ";
+=======
+
+    public function active(){
+        try{
+            $sql = "update {$this->tblEmployees} set ";
+            $sql .= "employee_is_active = :employee_is_active, "; 
+            $sql .= "employee_updated = :employee_updated ";
+            $sql .= "where employee_aid = :employee_aid"; 
+            
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "employee_is_active" => $this->employee_is_active,
                 "employee_updated" => $this->employee_updated,
                 "employee_aid" => $this->employee_aid,
             ]);
+<<<<<<< HEAD
         } catch (PDOException $e) {
             // returnError($e); //turn on whe debugging
+=======
+
+        } catch(PDOException $e){
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = false;
         }
         return $query;
     }
+<<<<<<< HEAD
     public function delete()
     {
         try {
             $sql = " delete from {$this->tblEmployees} ";
             $sql .= " where employee_aid = :employee_aid ";
+=======
+
+    public function delete(){
+        try{
+            $sql = "delete from {$this->tblEmployees} ";
+            $sql .= "where employee_aid = :employee_aid"; 
+            
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "employee_aid" => $this->employee_aid,
             ]);
+<<<<<<< HEAD
         } catch (PDOException $e) {
             // returnError($e); //turn on whe debugging
+=======
+
+        } catch(PDOException $e){
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = false;
         }
         return $query;
     }
+<<<<<<< HEAD
     public function checkName()
     {
         try {
             $sql = "select ";
             $sql .= " employee_first_name ";
+=======
+
+    public function checkName(){
+        try{
+            $sql = "select ";
+            $sql .= " employee_first_name";
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $sql .= " from {$this->tblEmployees} ";
             $sql .= " where employee_first_name = :employee_first_name ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "employee_first_name" => $this->employee_first_name,
             ]);
+<<<<<<< HEAD
         } catch (PROException $e) {
+=======
+        } catch(PDOException $e){
+            returnError($e);
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
             $query = false;
         }
         return $query;
     }
+<<<<<<< HEAD
 }
 */
+=======
+}
+>>>>>>> c2339cb80d773abbf43885e5bcd0378d71c11874
